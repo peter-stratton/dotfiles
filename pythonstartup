@@ -1,0 +1,4 @@
+#this tells python to use ipython as the interactive shell
+from IPython.frontend.terminal.ipapp import launch_new_instance
+launch_new_instance()
+raise SystemExit
