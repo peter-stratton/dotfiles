@@ -117,14 +117,14 @@ hi User2 ctermbg=red    ctermfg=white   guibg=#aa0000   guifg=#89a1a1
 
 " ==============Functions==============
 
-function! InsertTabWrapper()
-  let col = col('.') - 1
-  if !col || getline('.')[col - 1] !~ '\k'
-    return "\tab"
-  else
-    return "\<c-p>"
-endfunction
-
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
+"function! InsertTabWrapper()
+"  let col = col('.') - 1
+"  if !col || getline('.')[col - 1] !~ '\k'
+"    return "\tab"
+"  else
+"    return "\<c-p>"
+"endfunction
+"
+"inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+"inoremap <s-tab> <c-n>
 
