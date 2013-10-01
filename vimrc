@@ -23,6 +23,26 @@ set hidden                      "Allows buffers to exist in background
 "turn syntax highlighting on
 syntax on
 
+" ==============Pathogen and Plugins ===============
+" Use Pathogen
+call pathogen#infect()
+
+" tcomment
+" map // to comment/uncomment
+map // <c-_><c-_>
+
+" Nerdtree
+" map control+o to open nerdtree
+" use control+o to open a nerdtree window
+map <C-n> :NERDTreeToggle<CR>
+" open nerdtree automatically when starting vim if no file is specified
+autocmd vimenter * if !argc() | NERDTree | endif
+
+" Plasticboy - vim-markdown
+" disable folding
+let g:vim_markdown_folding_disabled=1
+
+
 " ==============No Swap Files===============
 set noswapfile
 set nobackup
