@@ -4,6 +4,9 @@ set nocompatible
 " set encoding to utf-8
 set fileencoding=utf-8
 set encoding=utf-8
+" Use Pathogen
+execute pathogen#infect()
+
 
 " ==============General Config===============
 set number                      "Show line numbers
@@ -17,16 +20,16 @@ set autoread                    "Reload files changed outside vim
 set cursorline                  "Show cursor line across screen
 set hidden                      "Allows buffers to exist in background
 
-" remap leader key to comma
-" let mapleader=","
+" Ctrl instead of Ctrl+w for split nav
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
 
 "turn syntax highlighting on
 syntax on
 
-" ==============Pathogen and Plugins ===============
-" Use Pathogen
-call pathogen#infect()
-
+" ==============Plugin Config===============
 " tcomment
 " map // to comment/uncomment
 map // <c-_><c-_>
