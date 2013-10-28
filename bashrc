@@ -121,3 +121,6 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 #python startup file path
 export PYTHONSTARTUP=$HOME/.pythonstartup
+
+#redis commands
+alias startredis='/usr/bin/redis-*/src/redis-server'
