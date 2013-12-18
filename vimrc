@@ -23,6 +23,13 @@ set hidden                      "Allows buffers to exist in background
 "turn syntax highlighting on
 syntax on
 
+" ==============Guiding hands===============
+" no arrow keys for you!
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
 " ==============No Swap Files===============
 set noswapfile
 set nobackup
