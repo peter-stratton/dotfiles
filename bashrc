@@ -120,7 +120,7 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 #source ~/.profile
 
 #python startup file path
-export PYTHONSTARTUP=$HOME/.pythonstartup
+# export PYTHONSTARTUP=$HOME/.pythonstartup
 
 # python 3 aliases
 alias 2to3="/opt/python3.3.5/bin/2to3"
