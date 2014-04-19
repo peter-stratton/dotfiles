@@ -5,6 +5,9 @@ set nocompatible
 set fileencoding=utf-8
 set encoding=utf-8
 
+" load pathogen
+execute pathogen#infect()
+
 " ==============General Config===============
 set number                      "Show line numbers
 set backspace=indent,eol,start  "Allow backspace in insert mode
@@ -18,10 +21,23 @@ set cursorline                  "Show cursor line across screen
 set hidden                      "Allows buffers to exist in background
 
 " remap leader key to comma
-" let mapleader=","
+let mapleader=","
 
 "turn syntax highlighting on
 syntax on
+
+" ==============Plugin Settings===============
+" tcomment - sublime style comment/uncomment key mapping
+map // <c-_><c-_>
+
+" nerdtree - use control+o to open a nerdtree window
+map <C-n> :NERDTreeToggle<CR>
+
+" nerdtree - open nerdtree automatically when starting vim if no file is specified
+autocmd vimenter * if !argc() | NERDTree | endif
+
+" plasticboy markdown - disable folding
+let g:vim_markdown_folding_disabled=1
 
 " ==============Guiding hands===============
 " no arrow keys for you!
@@ -123,15 +139,14 @@ hi User1 ctermbg=white  ctermfg=black   guibg=#89A1A1   guifg=#002836
 hi User2 ctermbg=red    ctermfg=white   guibg=#aa0000   guifg=#89a1a1
 
 " ==============Functions==============
+function! InsertTabWrapper()
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+    return "\tab"
+  else
+    return "\<c-p>"
+endfunction
 
-"function! InsertTabWrapper()
-"  let col = col('.') - 1
-"  if !col || getline('.')[col - 1] !~ '\k'
-"    return "\tab"
-"  else
-"    return "\<c-p>"
-"endfunction
-"
-"inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-"inoremap <s-tab> <c-n>
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
 

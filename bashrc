@@ -122,5 +122,13 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 #python startup file path
 export PYTHONSTARTUP=$HOME/.pythonstartup
 
-# python project environment vars
+# python 3 aliases
+alias 2to3="/opt/python3.3.5/bin/2to3"
+alias idle3="/opt/python3.3.5/bin/idle3"
+alias pydoc3="/opt/python3.3.5/bin/pydoc3"
+alias python3="/opt/python3.3.5/bin/python3"
+alias python3.3-config="/opt/python3.3.5/bin/python3.3m-config"
+alias python3-config="/opt/python3.3.5/bin/python3.3-config"
+alias pyvenv="/opt/python3.3.5/bin/pyvenv-3.3"
 
+# python project environment vars
