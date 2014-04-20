@@ -150,3 +150,42 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
+" toggle relative and absolute line numbers with Control+n
+"
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set number
+    else
+        set relativenumber
+    endif
+endfunc
+
+nnoremap <c-x> :call NumberToggle()<cr>
+
+" toggle soft line wrap
+"
+function ToggleWrap()
+    if (&wrap == 1)
+        set nowrap
+    else
+        set wrap linebreak textwidth=0
+    endif
+endfunction
+
+noremap <F9> :call ToggleWrap()<cr>
+
+" ==============Leader Commands==============
+" execute current python file
+nnoremap <leader>rr :! python %<c-r>
+" quickly open vimrc in vertical split window
+nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.vimrc<cr>
+" no highlighting quickly
+nnoremap <leader><space> :noh<cr>
+" rake preview shortcut
+nnoremap <leader>rp :! rake preview<cr>
+" run django tests
+nnoremap <leader>dt :! clear && manage.py test<cr>
+" git status
+nnoremap <leader>gs :! clear && git status<cr>
+" git add all and commit
+nnoremap <leader>gac :! git add . && git commit -am" 
