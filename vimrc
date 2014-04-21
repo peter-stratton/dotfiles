@@ -138,7 +138,10 @@ au BufRead,BufNewFile *.ru setfiletype ruby
 hi User1 ctermbg=white  ctermfg=black   guibg=#89A1A1   guifg=#002836
 hi User2 ctermbg=red    ctermfg=white   guibg=#aa0000   guifg=#89a1a1
 
+
 " ==============Functions==============
+" smarter tab completion
+"
 function! InsertTabWrapper()
   let col = col('.') - 1
   if !col || getline('.')[col - 1] !~ '\k'
@@ -150,17 +153,20 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
-" toggle relative and absolute line numbers with Control+n
+" toggle relative line numbers with color coding
 "
-function! NumberToggle()
-    if(&relativenumber == 1)
-        set number
-    else
-        set relativenumber
-    endif
-endfunc
+ function! NumberToggle()
+     if(&relativenumber == 1)
+         set norelativenumber
+         set number
+         highlight LineNr ctermfg=yellow
+     else
+         set relativenumber
+         highlight LineNr ctermfg=green
+     endif
+ endfunc
 
-nnoremap <c-x> :call NumberToggle()<cr>
+ nnoremap <c-\> :call NumberToggle()<cr>
 
 " toggle soft line wrap
 "
@@ -174,18 +180,26 @@ endfunction
 
 noremap <F9> :call ToggleWrap()<cr>
 
+" execute python file as if in idle
+"
+noremap <F5> :! python %<cr>
+
 " ==============Leader Commands==============
-" execute current python file
-nnoremap <leader>rr :! python %<c-r>
+
 " quickly open vimrc in vertical split window
 nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.vimrc<cr>
+
 " no highlighting quickly
 nnoremap <leader><space> :noh<cr>
+
 " rake preview shortcut
 nnoremap <leader>rp :! rake preview<cr>
+
 " run django tests
 nnoremap <leader>dt :! clear && manage.py test<cr>
+
 " git status
 nnoremap <leader>gs :! clear && git status<cr>
+
 " git add all and commit
-nnoremap <leader>gac :! git add . && git commit -am" 
+nnoremap <leader>gac :! git add . && git commit -am
