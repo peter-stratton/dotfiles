@@ -2,6 +2,13 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# Try importing source files
+if [ -e ~/.bash_aliases ]; then
+    source ~/.bash_aliases
+else
+    echo "bash_aliases file not found, moving on..."
+fi
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 

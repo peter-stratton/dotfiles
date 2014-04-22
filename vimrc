@@ -182,7 +182,7 @@ noremap <F9> :call ToggleWrap()<cr>
 
 " execute python file as if in idle
 "
-noremap <F5> :! python %<cr>
+noremap <F5> :! clear && python % \| less<cr>
 
 " ==============Leader Commands==============
 
