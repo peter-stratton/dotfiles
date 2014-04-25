@@ -20,6 +20,13 @@ set autoread                    "Reload files changed outside vim
 set cursorline                  "Show cursor line across screen
 set hidden                      "Allows buffers to exist in background
 
+
+" just hit control and direction key to switch tabs
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " remap leader key to comma
 let mapleader=","
 
