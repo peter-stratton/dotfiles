@@ -1,0 +1,15 @@
+## Add this line to bottom of 
+## Try importing source files
+# if [ -e ~/.phs_bashrc_ ]; then
+#     source ~/.phs_bashrc
+# else
+#    echo "phs_bashrc file not found, moving on..."
+#fi
+
+#tweak command line prompt to be simpler
+export PS1="[\W] $ "
+
+#add settings for virtualenv dev
+export PATH=".:$PATH"
+export WORKON_HOME="$HOME/.virtualenvs"
+source /usr/local/bin/virtualenvwrapper.sh
