@@ -28,9 +28,11 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
 " http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
 " highlight ColorColumn ctermbg=105 "LightSlateBlue
 highlight ColorColumn ctermbg=117 "SkyBlue
+set colorcolumn=100
 
 
 " ==============General Config===============
@@ -50,7 +52,6 @@ set autoread                    "Reload files changed outside vim
 set cursorline                  "Show cursor line across screen
 set hidden                      "Allows buffers to exist in background
 set scrolloff=8                 "always keep 8 lines between cursor and screen top or bottom
-set colorcolumn=100             "show a visual marker for max line column
 set tags=tags;/                 "search for tags from current file up
 
 
@@ -208,6 +209,18 @@ let mapleader=","
 map <space> /
 map <c-space> ?
 
+" Remap VIM 1 to first non-blank character
+map 1 ^
+
+" Remap VIM 0 to first non-blank character
+map 0 $
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 "
@@ -298,6 +311,12 @@ nnoremap <leader>s :! clear && /opt/scala/bin/scala %<cr>
 
 " run current scala file with args
 nnoremap <leader>sc :! clear && /opt/scala/bin/scala % 
+
+" run fsc with args
+nnoremap <leader>fsc :! clear && /opt/scala/bin/fsc % 
+
+" shutdown fsc
+nnoremap <leader>nofsc :! clear && /opt/scala/bin/fsc -shutdown <cr>
 
 " rake preview shortcut
 nnoremap <leader>rp :! rake preview<cr>
