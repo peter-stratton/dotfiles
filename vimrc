@@ -1,5 +1,4 @@
-﻿
-" load pathogen
+﻿" load pathogen
 execute pathogen#infect()
 
 " enable all options available in vim that are not available in vi
@@ -28,12 +27,8 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
-
 " http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
 " highlight ColorColumn ctermbg=105 "LightSlateBlue
-highlight ColorColumn ctermbg=117 "SkyBlue
-set colorcolumn=100
-
 
 " ==============General Config===============
 set number                      "Show line numbers
@@ -52,8 +47,11 @@ set autoread                    "Reload files changed outside vim
 set cursorline                  "Show cursor line across screen
 set hidden                      "Allows buffers to exist in background
 set scrolloff=8                 "always keep 8 lines between cursor and screen top or bottom
+set colorcolumn=80              "show a visual marker for max line column
 set tags=tags;/                 "search for tags from current file up
 
+set splitbelow                  "opens new split panes to bottom
+set splitright                  "opens new split panes to right
 
 " ==============Indentation==============
 set autoindent
@@ -71,6 +69,11 @@ set noswapfile
 set nobackup
 set nowb
 
+
+" ==============Persistent Undo===============
+set undofile
+set undolevels=500
+set undoreload=500
 
 " ==============Window Options==============
 set winwidth=84 " side by side win width min size for focused window
@@ -97,7 +100,7 @@ set linebreak   "wrap lines at convenient points
 " set foldnestmax=3         "deepest fold is 3 levels
 " set nofoldenable          "don't fold by default
 set foldmethod=marker
-set foldmarker={{{,}}}
+set foldmarker=#{{{,#}}}
 
 
 " ==============Completion==============
@@ -145,7 +148,7 @@ set showmatch
 
 
 " ==============Color Scheme==============
-" Solarized
+" " Solarized
 syntax enable
 let g:solarized_termcolors = 256
 colorscheme solarized
@@ -167,6 +170,8 @@ au BufRead,BufNewFile *.ru setfiletype ruby
 " ==============Plugin Settings===============
 " nerdtree - open nerdtree automatically when starting vim if no file is specified
 autocmd vimenter * if !argc() | NERDTree | endif
+" ignore .pyc files
+let NERDTreeIgnore = ['\.pyc$']
 
 " plasticboy markdown - disable folding
 let g:vim_markdown_folding_disabled=1
@@ -200,6 +205,26 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
+" delimitMate
+" this binding splits the line and tabs in the correct indentation amount
+imap <C-c> <CR><Esc>O
+
+" jshint2
+" Lint JavaScript files after reading it
+let jshint2_read = 1
+" Lint JavaScript files after saving it
+let jshint2_save = 1
+" Don't automatically close orphaned error lists
+let jshint2_close = 0
+" Skip lint confirmation for non-javascript files
+let jshint2_confirm = 0
+" Set default height of error list
+let jshint2_height = 20
+
+" Snipmate
+" remap expansion key to fix conflict with tab completion
+imap <C-J> <Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
 
 " ==============Key Remaps===============
 " remap leader key to comma
@@ -209,17 +234,9 @@ let mapleader=","
 map <space> /
 map <c-space> ?
 
-" Remap VIM 1 to first non-blank character
-map 1 ^
-
-" Remap VIM 0 to first non-blank character
-map 0 $
-
-" Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" map VIM 1 and 0 to beginning and end of lines
+" map 0 $
+" map 1 ^
 
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
@@ -235,12 +252,22 @@ map // <c-_><c-_>
 map <C-n> :NERDTreeToggle<CR>
 
 " vim-scala - format scala code
-let g:scala_sort_across_groups=1
-au BufEnter *.scala setl formatprg=java\ -jar\ /home/peter/exec/scalariform.jar\ -f\ -q\ +alignParameters\ +alignSingleLineCaseStatements\ +doubleIndentClassDeclaration\ +preserveDanglingCloseParenthesis\ +rewriteArrowSymbols\ +preserveSpaceBeforeArguments\ --stdin\ --stdout
-nmap <leader>m :SortScalaImports<CR>gggqG<C-o><C-o><leader><w>
+" let g:scala_sort_across_groups=1
+" au BufEnter *.scala setl formatprg=java\ -jar\ /home/peter/exec/scalariform.jar\ -f\ -q\ +alignParameters\ +alignSingleLineCaseStatements\ +doubleIndentClassDeclaration\ +preserveDanglingCloseParenthesis\ +rewriteArrowSymbols\ +preserveSpaceBeforeArguments\ --stdin\ --stdout
+" nmap <leader>m :SortScalaImports<CR>gggqG<C-o><C-o><leader><w>
 
+" easier split window navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " ============Function Key Mappings============
+" F1 = JSHint file
+nnoremap <silent><F1> :JSHint<CR>
+inoremap <silent><F1> <C-O>:JSHint<CR>
+vnoremap <silent><F1> :JSHint<CR>
+
 " F2 = set paste (pastetoggle http://stackoverflow.com/questions/2861627/paste-in-insert-mode)
 set pastetoggle=<F2>
 
@@ -251,7 +278,13 @@ set pastetoggle=<F2>
 nnoremap <F4> :GitGutterToggle<CR>
 
 " F5 = execute python file as if in idle
-noremap <F5> :! clear && python % \| less<cr>
+nnoremap <F5> :! clear && python % \| less<cr>
+
+" F6 = open current file in browser
+nnoremap <F6> :!open -a Safari %<CR><CR>
+
+" F7 = toggle spellcheck
+nnoremap <F7> :setlocal spell! spelllang=en_us<CR>
 
 " F8 = tagbar plugin (toggle ctag panel)
 nmap <F8> :TagbarToggle<CR>
@@ -306,17 +339,17 @@ nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.vimrc<cr>
 " no highlighting quickly
 nnoremap <leader><space> :noh<cr>
 
+" Dash search for word under cursor in current keyword setup for docset lookup
+nmap <silent> <leader>d :Dash<cr>
+
+" Dash search for word under cursor in all docsets
+nmap <silent> <leader>dg :Dash!<cr>
+
 " run current scala file
-nnoremap <leader>s :! clear && /opt/scala/bin/scala %<cr>
+nnoremap <leader>s :! clear && scala %<cr>
 
 " run current scala file with args
-nnoremap <leader>sc :! clear && /opt/scala/bin/scala % 
-
-" run fsc with args
-nnoremap <leader>fsc :! clear && /opt/scala/bin/fsc % 
-
-" shutdown fsc
-nnoremap <leader>nofsc :! clear && /opt/scala/bin/fsc -shutdown <cr>
+nnoremap <leader>sc :! clear && scala % 
 
 " rake preview shortcut
 nnoremap <leader>rp :! rake preview<cr>
@@ -326,6 +359,9 @@ nnoremap <leader>dt :! clear && manage.py test<cr>
 
 " git status
 nnoremap <leader>gs :! clear && git status<cr>
+
+" git last commit message
+nnoremap <leader>gl :! git log -1<cr>
 
 " git add all and commit
 nnoremap <leader>gac :! git add . && git commit -am"
